@@ -16,7 +16,7 @@ import { WeatherPage } from '../../pages/WeatherPage';
  */
 
 
-export const Toggle = (props) => {
+export const WeatherToggle = (props) => {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);

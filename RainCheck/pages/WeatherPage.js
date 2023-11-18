@@ -1,25 +1,28 @@
 import { SafeAreaView, View, StyleSheet, Button, TouchableOpacity, Text } from "react-native";
 import React, { useState } from 'react';
+import Clothing from "../components/Clothes/Clothing";
+import Toggle from "../components/Clothes/Toggle";
+import Suggestion from "../components/Clothes/Suggestion";
 import { Weather } from '../components/Weather/Weather';
-import { Toggle } from '../components/Weather/Toggle';
+import { WeatherToggle } from '../components/Weather/WeatherToggle';
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        alignItems: "center", // 中央揃えに変更
+        alignItems: "center",
     },
     upperContainer: {
         flexDirection: "row",
-        alignItems: "center", // 中央揃えに変更
+        alignItems: "center",
     },
     upperContainer: {
         flexDirection: "row",
     },
     topbox: {
         width: 200,
-        height: 100,
+        height: 50,
     },
     box: {
         width: 200,
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
     },
     bottombox: {
         width: 400,
-        height: 200,
+        height: 100,
     },
     bottomContainer: {
         marginTop: 20, // 上部との余白を設定
@@ -70,7 +73,7 @@ export const WeatherPage = () => {
                         weatherInfoNight={'45F'}
                         />
                     ) : (
-                        <Toggle
+                        <WeatherToggle
                         imagePathDay="rain"
                         weatherInfoDay={'75F'}
                         imagePathNight="snow"
@@ -89,7 +92,8 @@ export const WeatherPage = () => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <View style={[styles.bottombox, { backgroundColor: "yellow" }]} />
+                <View style={[styles.bottombox, { backgroundColor: "darkgray" }]} />
+                <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]} />
             </View>
         </SafeAreaView>
     );

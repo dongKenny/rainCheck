@@ -7,7 +7,7 @@ const WeatherAPI = () => {
   const [forecastData, setForecastData] = useState(null);
 
   const getLatLong = async () => {
-    const googleMapsApiKey = 'AIzaSyBNe4Ll1HbG3HxMYtOffdd29zfoFIny340';
+    const googleMapsApiKey = process.env.GOOGLE_API_KEY;
     try {
       const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {

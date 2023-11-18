@@ -47,13 +47,11 @@ const WeatherAPI = () => {
   const parseForecast = (periods) => {
     return periods.map(period => ({
       name: period.name,
-      startTime: period.startTime,
       isDaytime: period.isDaytime,
       temperature: period.temperature,
-      temperatureUnit: period.temperatureUnit,
-      probabilityOfPrecipitation: period.probabilityOfPrecipitation,
-      relativeHumidity: period.relativeHumidity,
-      windSpeed: period.windSpeed,
+      rain: period.probabilityOfPrecipitation.value/100,
+      humidity: period.relativeHumidity.value/100,
+      windSpeed: period.windSpeed.substring(0,period.windSpeed.indexOf(" ")),
       windDirection: period.windDirection,
       shortForecast: period.shortForecast,
       detailedForecast: period.detailedForecast
@@ -61,17 +59,20 @@ const WeatherAPI = () => {
   };
 
   const parseHourlyForecast = (periods) => {
-    return periods.map(period => ({
-      startTime: period.startTime,
-      isDaytime: period.isDaytime,
-      temperature: period.temperature,
-      temperatureUnit: period.temperatureUnit,
-      probabilityOfPrecipitation: period.probabilityOfPrecipitation,
-      relativeHumidity: period.relativeHumidity,
-      windSpeed: period.windSpeed,
-      windDirection: period.windDirection,
-      shortForecast: period.shortForecast,
-    }));
+    const hourlyForecast = {};
+    periods.forEach((period, index) => {
+      hourlyForecast[index] = {
+        startTime: period.startTime,
+        isDaytime: period.isDaytime,
+        temperature: period.temperature,
+        rain: period.probabilityOfPrecipitation.value/100,
+        humidity: period.relativeHumidity.value/100,
+        windSpeed: period.windSpeed.substring(0,period.windSpeed.indexOf(" ")),
+        windDirection: period.windDirection,
+        shortForecast: period.shortForecast,
+      };
+    });
+    return hourlyForecast;
   };
 
   const handleSubmit = () => {

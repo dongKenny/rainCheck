@@ -4,15 +4,18 @@ import {
   StyleSheet,
   View,
   Text,
+  Button,
   TouchableOpacity,
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from Expo
 
-export default function Header({ currentCity, onIOSIconPress }) {
+export default function Header({ currentCity, onIOSIconPress, onSwitchPage }) {
   return (
     <View style={styles.container}>
-      <View style={styles.headbox}></View>
+      <View style={styles.headbox}>
+        <Button title="Events" onPress={onSwitchPage} />
+      </View>
       <View style={styles.headbox}>
         <Text style={styles.text}>{currentCity}</Text>
       </View>
@@ -42,6 +45,7 @@ const styles = StyleSheet.create({
   },
   headbox: {
     flex: 1,
+    justifyContent: "flex-start",
   },
   text: {
     fontSize: 20,

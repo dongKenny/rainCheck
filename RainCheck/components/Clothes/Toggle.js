@@ -7,7 +7,7 @@ export default function Toggle({ onPressButton, currentTime }) {
       <View
         style={[
           styles.buttoncontainer,
-          { backgroundColor: currentTime ? "hotpink" : "aliceblue" },
+          { backgroundColor: currentTime ? "thistle" : "aliceblue" },
         ]}
       >
         <Button
@@ -22,7 +22,7 @@ export default function Toggle({ onPressButton, currentTime }) {
       <View
         style={[
           styles.buttoncontainer,
-          { backgroundColor: currentTime ? "aliceblue" : "hotpink" },
+          { backgroundColor: currentTime ? "aliceblue" : "thistle" },
         ]}
       >
         <Button

@@ -75,9 +75,9 @@ export default function Clothing( {dayData, nightData} ) {
       case "jeans":
         return require(`../../assets/clothes/bottom/jeans.png`);
       case "khaki":
-        return require(`../../assets/clothes/bottom/khaki.jpg`);
+        return require(`../../assets/clothes/bottom/khaki.png`);
       case "shorts":
-        return require(`../../assets/clothes/bottom/shorts.jpg`);
+        return require(`../../assets/clothes/bottom/shorts.png`);
       case "trunks":
         return require(`../../assets/clothes/bottom/trunks.png`);
     }

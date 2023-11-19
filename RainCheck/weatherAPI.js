@@ -10,12 +10,11 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
   }, [address]);
 
   const getLatLong = async (address) => {
-    const googleMapsApiKey = 'AIzaSyBNe4Ll1HbG3HxMYtOffdd29zfoFIny340';
     try {
       const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {
           address: address,
-          key: googleMapsApiKey
+          key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY
         }
       });
 
@@ -33,7 +32,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
     const cityComponent = addressComponents.find(component =>
       component.types.includes('locality')
     );
-    return cityComponent ? cityComponent.long_name : null;
+    return cityComponent ? cityComponent.long_name : addressComponents[0]['long_name'];
   };
 
   const getWeather = async (latitude, longitude, city) => {
@@ -46,10 +45,12 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
         axios.get(forecastUrl),
         axios.get(hourlyForecastUrl)
       ]);
-
+      const aqi_response = await axios.get(`https://api.waqi.info/feed/${encodeURIComponent(city.trim())}/?token=${process.env.EXPO_PUBLIC_AQI_API_KEY}`);
+      const aqi = aqi_response['data']['data']['aqi'];
       const parsedData = {
         dailyForecast: parseForecast(forecastResponse.data.properties.periods),
-        hourlyForecast: parseHourlyForecast(hourlyForecastResponse.data.properties.periods)
+        hourlyForecast: parseHourlyForecast(hourlyForecastResponse.data.properties.periods),
+        aqi: aqi
       };
 
       setForecastData(parsedData);

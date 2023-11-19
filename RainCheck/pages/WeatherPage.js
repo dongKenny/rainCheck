@@ -13,7 +13,7 @@ import Suggestion from "../components/Clothes/Suggestion";
 import Details from "../components/Details/Details";
 import Header from "../components/Location/Header";
 import { Weather } from "../components/Weather/Weather";
-import { WeatherToggle } from "../components/Weather/WeatherToggle";
+import { parseShortForecast } from "../clothing_selection";
 import { ForecastBlock } from "../components/Forecast/ForecastBlock";
 
 const styles = StyleSheet.create({
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
-  const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
+  const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
   const toggleWeather = () => {
@@ -79,6 +79,21 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
     onIconPress();
   };
 
+  const dayTimeToday = daily[0]["isDaytime"] ? daily[0] : daily[1];
+  const nightTimeToday = daily[0]["isDaytime"] ? daily[1] : daily[0];
+
+  const dayTimeTomorrow = daily[2]["isDaytime"] ? daily[2] : daily[3];
+  const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
+
+  const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
+  const forecastTonight = parseShortForecast(dayTimeToday["detailedForecast"]);
+  const forecastTomorrow = parseShortForecast(
+    dayTimeTomorrow["detailedForecast"]
+  );
+  const forecastTomorrowNight = parseShortForecast(
+    dayTimeTomorrow["detailedForecast"]
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
@@ -86,23 +101,25 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>
-          <Clothing />
-          <Suggestion />
+          <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
+          <Suggestion detailedForecast={daily[0]["detailedForecast"]} />
         </View>
         <View style={[styles.box, { backgroundColor: "green" }]}>
           {isWeatherVisible ? (
             <Weather
-              imagePathDay="sunny"
-              weatherInfoDay={daily[0]["temperature"]}
-              imagePathNight="cloudyRain"
-              weatherInfoNight={daily[1]["temperature"]}
+              isToday={true}
+              imagePathDay={forecastToday}
+              weatherInfoDay={dayTimeToday["temperature"]}
+              imagePathNight={forecastTonight}
+              weatherInfoNight={nightTimeToday["temperature"]}
             />
           ) : (
-            <WeatherToggle
-              imagePathDay="rain"
-              weatherInfoDay={daily[2]["temperature"]}
-              imagePathNight="snow"
-              weatherInfoNight={daily[3]["temperature"]}
+            <Weather
+              isToday={false}
+              imagePathDay={forecastTomorrow}
+              weatherInfoDay={dayTimeTomorrow["temperature"]}
+              imagePathNight={forecastTomorrowNight}
+              weatherInfoNight={nightTimeTomorrow["temperature"]}
             />
           )}
           {/* button to select today or tomorrow */}
@@ -123,10 +140,15 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
       </View>
       <View style={styles.bottomContainer}>
         <View style={[styles.bottombox, { backgroundColor: "darkgray" }]}>
-          <Details />
+          <Details
+            isToday={isWeatherVisible}
+            today={dayTimeToday}
+            tomorrow={dayTimeTomorrow}
+            aqi={forecastData["aqi"]}
+          />
         </View>
         <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
-          <ForecastBlock />
+          <ForecastBlock hourlyForecast={hourly} weeklyForecast={daily} />
         </View>
       </View>
     </SafeAreaView>

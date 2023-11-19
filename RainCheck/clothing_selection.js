@@ -1,19 +1,29 @@
 import * as outfits from './constants/outfits';
 
-function parseShortForecast(forecast) {
-    if (forecast.includes('sunny')) {
-        return 'sunny';
+export function parseShortForecast(forecast) {
+    forecast = forecast.toLowerCase();
+
+    let firstForecast = '';
+    let firstForecastIndex = forecast.length - 1;
+    const forecasts = ['cloudy', 'clear', 'rain', 'blizzard', 'thunder', 'snow', 'sunny'];
+
+    // Returns the first mentioned forecast in the description to prevent ordering of statements affecting outcome
+    forecasts.forEach((possibleForecast) => {
+        const idx = forecast.indexOf(possibleForecast);
+        if (idx != -1 && idx < firstForecastIndex) {
+            firstForecast = possibleForecast;
+            firstForecastIndex = idx;
+        }
+    }); 
+
+    switch(firstForecast) {
+        case 'blizzard':
+            return 'heavySnow';
+        case 'thunder':
+            return 'storm'
+        default:
+            return firstForecast;
     }
-    if (forecast.includes('cloudy')) {
-        return 'cloudy';
-    }
-    if (forecast.includes('clear')) {
-        return 'clear';
-    }
-    if (forecast.includes('rain') || forecast.includes('shower') || forecast.includes('storm')) {
-        return 'rain';
-    }
-    return ''
 }
 
 
@@ -33,7 +43,7 @@ function filterTemp(temperature, forecast) {
 
 
 function filterRain(precipitation, forecast, outfit) {
-    if (forecast === 'rain' || precipitation >= .6) {
+    if (['rain', 'storm', 'heavyRain'].includes(forecast) || precipitation >= .6) {
         return outfits.RAINY_CLOTHES;
     }
     if (precipitation >= .4) {
@@ -57,8 +67,8 @@ export default function chooseClothes(weather_data) {
     // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9035969/
     // http://koreascience.or.kr/article/JAKO201717234703282.pdf 
 
-    let clothes = filterTemp(weather_data['temperature'], weather_data['shortForecast'].toLowerCase());
-    clothes = filterRain(weather_data['rain'], weather_data['shortForecast'].toLowerCase(), clothes);
+    let clothes = filterTemp(weather_data['temperature'], weather_data['forecast'].toLowerCase());
+    clothes = filterRain(weather_data['rain'], weather_data['forecast'].toLowerCase(), clothes);
 
     return {
         head: selectRandom(clothes['head']),

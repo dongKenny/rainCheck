@@ -60,7 +60,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData }) => {
+export const WeatherPage = ({
+  currentCity,
+  forecastData,
+  onIconPress,
+  onSwitchPage,
+}) => {
   const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -99,7 +104,11 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
+        <Header
+          currentCity={cityName}
+          onIOSIconPress={handlePressOnIcon}
+          onSwitchPage={onSwitchPage}
+        />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "lavenderblush" }]}>

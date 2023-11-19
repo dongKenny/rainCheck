@@ -1,14 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { WeatherPage } from './pages/WeatherPage';
-import { Weather } from './components/Weather/Weather';
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { WeatherPage } from "./pages/WeatherPage";
+import { Weather } from "./components/Weather/Weather";
+import ForecastPrompt from "./components/Location/Prompt";
 
 export default function App() {
+  const [currentAddress, setCurrentAddress] = useState("");
+
+  useEffect(() => {
+    if (!currentAddress) {
+      setCurrentAddress(null);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <WeatherPage />
-      <StatusBar style="auto" />
+      {currentAddress === null ? (
+        <ForecastPrompt
+          initialAddress={currentAddress}
+          onAddressUpdate={setCurrentAddress}
+        />
+      ) : (
+        <>
+          <WeatherPage />
+          <StatusBar style="auto" />
+        </>
+      )}
     </View>
   );
 }
@@ -16,8 +34,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

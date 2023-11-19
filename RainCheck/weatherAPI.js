@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, Button, ScrollView } from 'react-native';
 import axios from 'axios';
 
-const WeatherAPI = () => {
-  const [address, setAddress] = useState('');
+const WeatherAPI = ({ address, onForecastFetch }) => {
   const [forecastData, setForecastData] = useState(null);
 
+  useEffect(() => {
+    if (address) {
+      getLatLong(address);
+    }
+  }, [address]);
+
   const getLatLong = async () => {
-    const googleMapsApiKey = 'AIzaSyBNe4Ll1HbG3HxMYtOffdd29zfoFIny340';
+    const googleMapsApiKey = process.env.GOOGLE_API_KEY;
     try {
       const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {
@@ -39,6 +44,7 @@ const WeatherAPI = () => {
       };
 
       setForecastData(parsedData);
+
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
@@ -81,9 +87,14 @@ const WeatherAPI = () => {
 
   return (
     <ScrollView style={{ padding: 20 }}>
+      {forecastData && <Text style={{ marginTop: 20 }}>{JSON.stringify(forecastData, null, 2)}</Text>}
+    </ScrollView>
+  );
+  /*
+  return (
+    <ScrollView style={{ padding: 20 }}>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20 }}
-        onChangeText={text => setAddress(text)}
         value={address}
         placeholder="Enter address"
       />
@@ -94,6 +105,7 @@ const WeatherAPI = () => {
       {forecastData && <Text style={{ marginTop: 20 }}>{JSON.stringify(forecastData, null, 2)}</Text>}
     </ScrollView>
   );
+  */
 };
 
 export default WeatherAPI;

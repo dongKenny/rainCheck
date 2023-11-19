@@ -12,9 +12,6 @@ import Clothing from "../components/Clothes/Clothing";
 import Suggestion from "../components/Clothes/Suggestion";
 import Details from "../components/Details/Details";
 import Header from "../components/Location/Header";
-import Clothing from "../components/Clothes/Clothing";
-import Toggle from "../components/Clothes/Toggle";
-import Suggestion from "../components/Clothes/Suggestion";
 import { Weather } from "../components/Weather/Weather";
 import { WeatherToggle } from "../components/Weather/WeatherToggle";
 import { ForecastBlock } from "../components/Forecast/ForecastBlock";
@@ -73,7 +70,7 @@ export const WeatherPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <View style={[styles.topbox, { backgroundColor: "white" }]} />
+        <Header />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>

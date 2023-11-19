@@ -4,7 +4,6 @@ import { Container } from '../Forecast/Container';
 import { parseShortForecast } from "../../clothing_selection";
 
 const getWeatherData = (viewMode, daily, weekly) => {
-  console.log(weekly);
   const currentHour = new Date().getHours();
   // Assume you have a function to get weekly weather data and daily weather data
   if (viewMode === 'daily') {

@@ -93,7 +93,10 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>
-          <Clothing />
+          <Clothing 
+            dayData={dayTimeToday}
+            nightData={nightTimeToday}
+          />
           <Suggestion 
             detailedForecast={daily[0]['detailedForecast']}
           />

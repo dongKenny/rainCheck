@@ -67,8 +67,8 @@ export default function chooseClothes(weather_data) {
     // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9035969/
     // http://koreascience.or.kr/article/JAKO201717234703282.pdf 
 
-    let clothes = filterTemp(weather_data['temperature'], weather_data['shortForecast'].toLowerCase());
-    clothes = filterRain(weather_data['rain'], weather_data['shortForecast'].toLowerCase(), clothes);
+    let clothes = filterTemp(weather_data['temperature'], weather_data['forecast'].toLowerCase());
+    clothes = filterRain(weather_data['rain'], weather_data['forecast'].toLowerCase(), clothes);
 
     return {
         head: selectRandom(clothes['head']),

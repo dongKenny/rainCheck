@@ -1,5 +1,6 @@
 import { SafeAreaView, View, StyleSheet } from "react-native";
 import React from 'react';
+import Header from "../components/Location/Header";
 
 const styles = StyleSheet.create({
     container: {
@@ -32,11 +33,14 @@ const styles = StyleSheet.create({
     },
 });
 
-export const WeatherPage = () => {
+export const WeatherPage = ({ currentCity }) => { 
+    const cityName = currentCity?.name || "Loading..."; // Replace 'name' with the correct property
     return (
         <SafeAreaView style={styles.container}>
+            <Header currentCity={currentCity} /> {/* Insert Header component */}
+            
             <View style={styles.topContainer}>
-            <View style={[styles.topbox, { backgroundColor: "white" }]} />
+                <View style={[styles.topbox, { backgroundColor: "white" }]} />
             </View>
             <View style={styles.upperContainer}>
                 <View style={[styles.box, { backgroundColor: "red" }]} />

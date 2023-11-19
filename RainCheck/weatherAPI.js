@@ -12,7 +12,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
   }, [address]);
 
   const getLatLong = async () => {
-    const googleMapsApiKey = process.env.GOOGLE_API_KEY;
+    const googleMapsApiKey = 'AIzaSyBNe4Ll1HbG3HxMYtOffdd29zfoFIny340';
     try {
       const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {
@@ -20,11 +20,22 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
           key: googleMapsApiKey
         }
       });
-      const { lat, lng } = response.data.results[0].geometry.location;
-      getWeather(lat, lng);
+
+      const locationData = response.data.results[0];
+      const { lat, lng } = locationData.geometry.location;
+      const city = extractCity(locationData.address_components); 
+      
+      getWeather(lat, lng, city);
     } catch (error) {
       console.error('Error fetching location data:', error);
     }
+  };
+
+  const extractCity = (addressComponents) => {
+    const cityComponent = addressComponents.find(component =>
+      component.types.includes('locality')
+    );
+    return cityComponent ? cityComponent.long_name : null;
   };
 
   const getWeather = async (latitude, longitude) => {
@@ -44,7 +55,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
       };
 
       setForecastData(parsedData);
-
+      onForecastFetch(parsedData, city);
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
@@ -81,31 +92,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
     return hourlyForecast;
   };
 
-  const handleSubmit = () => {
-    getLatLong();
-  };
-
-  return (
-    <ScrollView style={{ padding: 20 }}>
-      {forecastData && <Text style={{ marginTop: 20 }}>{JSON.stringify(forecastData, null, 2)}</Text>}
-    </ScrollView>
-  );
-  /*
-  return (
-    <ScrollView style={{ padding: 20 }}>
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20 }}
-        value={address}
-        placeholder="Enter address"
-      />
-      <Button
-        onPress={handleSubmit}
-        title="Get Weather Forecast"
-      />
-      {forecastData && <Text style={{ marginTop: 20 }}>{JSON.stringify(forecastData, null, 2)}</Text>}
-    </ScrollView>
-  );
-  */
+  return null;
 };
 
 export default WeatherAPI;

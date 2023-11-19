@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
-import { getWeatherAsset } from '../Weather/Weather';
+import React from "react";
+import { View, Image, Text, StyleSheet } from "react-native";
+import { getWeatherAsset } from "../Weather/Weather";
 
 /**
- * 
+ *
  * @param {
  *  day: nextHour (String)
  *  imagePathWeather: image path (String)
@@ -11,15 +11,14 @@ import { getWeatherAsset } from '../Weather/Weather';
  *  formattedHour: nexthours (String)
  *  dayOfWeek: day of week (String)
  *  dailyTemp: daily temp for a week(String)
- * } props 
- * @returns 
+ * } props
+ * @returns
  */
 
-
-export const Container = (props) => {  
+export const Container = (props) => {
   const today = new Date();
   const currentHour = today.getHours();
-  const formattedHour = currentHour.toString().padStart(2, '0');
+  const formattedHour = currentHour.toString().padStart(2, "0");
 
   let imagePathWeather = getWeatherAsset(props.imagePathWeather);
 
@@ -27,11 +26,17 @@ export const Container = (props) => {
     <View style={styles.container}>
       <View style={styles.weatherContainer}>
         {props.day && <Text style={styles.daytext}>{props.day}</Text>}
-        {props.dayOfWeek && <Text style={styles.daytext}>{props.dayOfWeek}</Text>}
-        {props.formattedHour && <Text style={styles.text}>{props.formattedHour}</Text>}
+        {props.dayOfWeek && (
+          <Text style={styles.dayOfWeektext}>{props.dayOfWeek}</Text>
+        )}
+        {props.formattedHour && (
+          <Text style={styles.hourlytext}>{props.formattedHour}</Text>
+        )}
         <View style={styles.imageAndInfoContainer}>
-        <View style={styles.spaceBetween}></View>
+          <View style={styles.spaceBetween}></View>
           <Image style={styles.image} source={imagePathWeather} />
+
+          <View style={styles.spaceBetween}></View>
           <Text style={styles.hourlyTemp}>{props.hourlyTemp}</Text>
           <Text style={styles.dailyTemp}>{props.dailyTemp}</Text>
         </View>
@@ -40,38 +45,46 @@ export const Container = (props) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center', // Center items vertically
+    alignItems: "center", // Center items vertically
     marginHorizontal: 15, // Adjust spacing if needed
   },
   daytext: {
-    fontSize: 10,
-    color: 'brown',
-    fontWeight: 'bold',
-  },
-  text: {
     fontSize: 12,
-    color: 'black',
-    fontWeight: 'bold',
+    color: "brown",
+    fontWeight: "bold",
+  },
+  hourlytext: {
+    fontSize: 12,
+    color: "black",
+    fontWeight: "bold",
+  },
+  dayOfWeektext: {
+    fontSize: 12,
+    color: "black",
+    fontWeight: "bold",
   },
   image: {
     width: 20,
     height: 20,
   },
   hourlyTemp: {
-    fontSize: 10,
-    color: 'black', // Adjust color as needed
+    fontSize: 12,
+    color: "black", // Adjust color as needed
+  },
+  dailyTemp: {
+    fontSize: 12,
+    color: "black", // Adjust color as needed
   },
   spaceBetween: {
     marginTop: 5,
   },
   weatherContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   imageAndInfoContainer: {
-    flexDirection: 'column', // Change to column
-    alignItems: 'center',
+    flexDirection: "column", // Change to column
+    alignItems: "center",
   },
 });

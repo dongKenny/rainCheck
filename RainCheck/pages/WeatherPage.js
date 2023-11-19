@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData }) => {
+export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 

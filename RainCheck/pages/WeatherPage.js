@@ -82,13 +82,9 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTonight = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTomorrow = parseShortForecast(
-    dayTimeTomorrow["detailedForecast"]
-  );
-  const forecastTomorrowNight = parseShortForecast(
-    dayTimeTomorrow["detailedForecast"]
-  );
+  const forecastTonight = parseShortForecast(nightTimeToday["detailedForecast"]);
+  const forecastTomorrow = parseShortForecast(dayTimeTomorrow["detailedForecast"]);
+  const forecastTomorrowNight = parseShortForecast(nightTimeTomorrow["detailedForecast"]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -98,7 +94,7 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "lavenderblush" }]}>
           <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
-          <Suggestion detailedForecast={daily[0]["detailedForecast"]} />
+          <Suggestion detailedForecast={isWeatherVisible ? dayTimeToday['detailedForecast'] : dayTimeTomorrow['detailedForecast']} />
         </View>
         <View style={[styles.box, { backgroundColor: "lavender" }]}>
           {isWeatherVisible ? (

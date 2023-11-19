@@ -23,7 +23,8 @@ export default function App() {
 
   const handleIconPress = () => {
     setCurrentAddress(null);
-    console.log("happy");
+    setForecastData(null);
+    setCurrentCity(null);
   };
 
   return (

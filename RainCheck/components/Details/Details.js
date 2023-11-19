@@ -4,7 +4,6 @@ import Block from "./Block";
 
 export default function Details( {isToday, today, tomorrow} ) {
   const detail = isToday ? today : tomorrow
-  console.log(detail);
 
   const detailInfo = {
     humidity: {

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData }) => { 
+export const WeatherPage = ({ currentCity, forecastData }) => {
   const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -72,8 +72,8 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
     return;
   }
 
-  const daily = forecastData['dailyForecast'];
-  const hourly = forecastData['hourlyForecast'];
+  const daily = forecastData["dailyForecast"];
+  const hourly = forecastData["hourlyForecast"];
 
   const dayTimeToday = daily[0]['isDaytime'] ? daily[0] : daily[1];
   const nightTimeToday = daily[0]['isDaytime'] ? daily[1] : daily[0];
@@ -86,10 +86,8 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header currentCity={cityName} />
-            
       <View style={styles.topContainer}>
-            <Header />
+        <Header currentCity={cityName} />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>

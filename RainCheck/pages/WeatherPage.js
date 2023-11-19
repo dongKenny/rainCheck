@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData }) => { 
+export const WeatherPage = ({ currentCity, forecastData }) => {
   const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -72,15 +72,13 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
     return;
   }
 
-  const daily = forecastData['dailyForecast'];
-  const hourly = forecastData['hourlyForecast'];
+  const daily = forecastData["dailyForecast"];
+  const hourly = forecastData["hourlyForecast"];
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header currentCity={cityName} />
-            
       <View style={styles.topContainer}>
-            <Header />
+        <Header currentCity={cityName} />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>
@@ -91,16 +89,16 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
           {isWeatherVisible ? (
             <Weather
               imagePathDay="sunny"
-              weatherInfoDay={daily[0]['temperature']}
+              weatherInfoDay={daily[0]["temperature"]}
               imagePathNight="cloudyRain"
-              weatherInfoNight={daily[1]['temperature']}
+              weatherInfoNight={daily[1]["temperature"]}
             />
           ) : (
             <WeatherToggle
               imagePathDay="rain"
-              weatherInfoDay={daily[2]['temperature']}
+              weatherInfoDay={daily[2]["temperature"]}
               imagePathNight="snow"
-              weatherInfoNight={daily[3]['temperature']}
+              weatherInfoNight={daily[3]["temperature"]}
             />
           )}
           {/* button to select today or tomorrow */}

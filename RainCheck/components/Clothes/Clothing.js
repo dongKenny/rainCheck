@@ -38,7 +38,7 @@ export default function Clothing( {dayData, nightData} ) {
 
   const getTopSource = (clothItem) => {
     switch (clothItem) {
-      case "tshirt":
+      case "shirt":
         return require(`../../assets/clothes/top/tshirt.png`);
       case "sweater":
         return require(`../../assets/clothes/top/sweater.png`);

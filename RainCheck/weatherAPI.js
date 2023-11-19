@@ -33,7 +33,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
     const cityComponent = addressComponents.find(component =>
       component.types.includes('locality')
     );
-    return cityComponent ? cityComponent.long_name : null;
+    return cityComponent ? cityComponent.long_name : addressComponents[0]['long_name'];
   };
 
   const getWeather = async (latitude, longitude, city) => {

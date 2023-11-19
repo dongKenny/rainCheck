@@ -20,16 +20,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center", // 中央揃えに変更
+    alignItems: "center",
   },
   topContainer: {
     flex: 1,
     justifyContent: "center",
     alignContent: "stretch",
+    backgroundColor: "plum",
   },
   upperContainer: {
     flexDirection: "row",
-    alignItems: "center", // 中央揃えに変更
+    alignItems: "center",
   },
   topbox: {
     width: 200,
@@ -44,23 +45,22 @@ const styles = StyleSheet.create({
     height: 100,
   },
   bottomContainer: {
-    marginTop: 20, // 上部との余白を設定
     alignItems: "center",
   },
   button: {
     padding: 8,
     borderRadius: 5,
-    marginVertical: 8,
+    // marginVertical: 8,
   },
   buttonText: {
     fontSize: 15, // Adjust the font size as needed
     fontWeight: "bold",
     textAlign: "center", // Center the text horizontally
-    color: "gray", // Adjust the color as needed
+    color: "dimgray", // Adjust the color as needed
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
+export const WeatherPage = ({ currentCity, forecastData }) => {
   const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -86,9 +86,15 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTonight = parseShortForecast(nightTimeToday["detailedForecast"]);
-  const forecastTomorrow = parseShortForecast(dayTimeTomorrow["detailedForecast"]);
-  const forecastTomorrowNight = parseShortForecast(nightTimeTomorrow["detailedForecast"]);
+  const forecastTonight = parseShortForecast(
+    nightTimeToday["detailedForecast"]
+  );
+  const forecastTomorrow = parseShortForecast(
+    dayTimeTomorrow["detailedForecast"]
+  );
+  const forecastTomorrowNight = parseShortForecast(
+    nightTimeTomorrow["detailedForecast"]
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,11 +102,17 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
         <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
       </View>
       <View style={styles.upperContainer}>
-        <View style={[styles.box, { backgroundColor: "red" }]}>
+        <View style={[styles.box, { backgroundColor: "lavenderblush" }]}>
           <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
-          <Suggestion detailedForecast={isWeatherVisible ? dayTimeToday['detailedForecast'] : dayTimeTomorrow['detailedForecast']} />
+          <Suggestion
+            detailedForecast={
+              isWeatherVisible
+                ? dayTimeToday["detailedForecast"]
+                : dayTimeTomorrow["detailedForecast"]
+            }
+          />
         </View>
-        <View style={[styles.box, { backgroundColor: "green" }]}>
+        <View style={[styles.box, { backgroundColor: "lavender" }]}>
           {isWeatherVisible ? (
             <Weather
               isToday={true}
@@ -123,7 +135,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
             style={[
               styles.button,
               {
-                backgroundColor: isWeatherVisible ? "lightgreen" : "lightblue",
+                backgroundColor: isWeatherVisible ? "thistle" : "lightgray",
               },
             ]}
             onPress={toggleWeather}
@@ -135,7 +147,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <View style={[styles.bottombox, { backgroundColor: "darkgray" }]}>
+        <View style={[styles.bottombox, { backgroundColor: "honeydew" }]}>
           <Details
             isToday={isWeatherVisible}
             today={dayTimeToday}
@@ -143,7 +155,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
             aqi={forecastData["aqi"]}
           />
         </View>
-        <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
+        <View style={[styles.bottombox, { backgroundColor: "ivory" }]}>
           <ForecastBlock hourlyForecast={hourly} weeklyForecast={daily} />
         </View>
       </View>

@@ -126,13 +126,13 @@ const styles = StyleSheet.create({
   leftBar: {
     width: 50, // Adjust the width as needed
     marginRight: 5, // Add right margin for spacing between bars
-    backgroundColor: 'lightblue', // Add a background color for visibility
+    backgroundColor: 'wheat', // Add a background color for visibility
   },
   spaceBetween: {
     height: 20, // Use remaining space in the container
   },
   toggleButton: {
-    backgroundColor: 'lightpink',
+    backgroundColor: 'thistle',
     padding: 5,
     borderRadius: 5,
     margin: 5,

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from Expo
 
-export default function Header( {currentCity} ) {
+export default function Header({ currentCity, onIOSIconPress }) {
   return (
     <View style={styles.container}>
       <View style={styles.headbox}></View>
@@ -22,11 +22,7 @@ export default function Header( {currentCity} ) {
           { flexDirection: "row", justifyContent: "flex-end" },
         ]}
       >
-        <TouchableOpacity
-          onPress={() => {
-            console.log("Change Location");
-          }}
-        >
+        <TouchableOpacity onPress={onIOSIconPress}>
           <Ionicons name="ios-menu" size={40} color="black" />
         </TouchableOpacity>
       </View>

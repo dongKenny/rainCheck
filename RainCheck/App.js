@@ -1,12 +1,12 @@
-import React, { useState,useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { WeatherPage} from './pages/WeatherPage'
-import ForecastPrompt from './components/Location/Prompt';
-import WeatherAPI from './weatherAPI'; 
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { WeatherPage } from "./pages/WeatherPage";
+import ForecastPrompt from "./components/Location/Prompt";
+import WeatherAPI from "./weatherAPI";
 
 export default function App() {
-  const [currentAddress, setCurrentAddress] = useState('');
+  const [currentAddress, setCurrentAddress] = useState("");
   const [forecastData, setForecastData] = useState(null);
   const [currentCity, setCurrentCity] = useState(null);
 
@@ -18,7 +18,12 @@ export default function App() {
 
   const handleForecastFetch = (forecast, city) => {
     setForecastData(forecast);
-    setCurrentCity(city); 
+    setCurrentCity(city);
+  };
+
+  const handleIconPress = () => {
+    setCurrentAddress(null);
+    console.log("happy");
   };
 
   return (
@@ -30,13 +35,14 @@ export default function App() {
         />
       ) : (
         <>
-          <WeatherAPI 
+          <WeatherAPI
             address={currentAddress}
             onForecastFetch={handleForecastFetch} // Pass the function to update forecastData
           />
-          <WeatherPage 
+          <WeatherPage
             currentCity={currentCity}
             forecastData={forecastData}
+            onIconPress={handleIconPress}
           />
           <StatusBar style="auto" />
         </>

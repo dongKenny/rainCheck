@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export const WeatherPage = ({
   currentCity,
   forecastData,

@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "darkblue",
     width: Dimensions.get("window").width,
     // backgroundColor: "red",
   },
   headbox: {
+    flexDirection: "row",
     flex: 1,
     justifyContent: "flex-start",
   },

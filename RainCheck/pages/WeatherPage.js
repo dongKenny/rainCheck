@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData }) => {
+export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -75,10 +75,14 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const daily = forecastData["dailyForecast"];
   const hourly = forecastData["hourlyForecast"];
 
+  const handlePressOnIcon = () => {
+    onIconPress();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Header currentCity={cityName} />
+        <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>

@@ -3,9 +3,37 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native';
 
 
+export function getWeatherAsset(imageType) {
+  switch (imageType) {
+    case 'cloudy':
+      return require('../../assets/weather/cloudy.png');
+    case 'rain':
+      return require('../../assets/weather/rain.png');
+    case 'sunny':
+      return require('../../assets/weather/sunny.png');
+    case 'snow':
+      return require('../../assets/weather/snow.png');
+    case 'storm':
+      return require('../../assets/weather/snow.png');
+    case 'clear':
+      return require('../../assets/weather/clear.png');
+    case 'heavyRain':
+      return require('../../assets/weather/heavyRain.png');
+    case 'typhoon':
+      return require('../../assets/weather/typhoon.png');
+    default:
+      // No default case
+      break;
+  }
+  return;
+}
+
+
+
 /**
  * 
  * @param {
+ *  isToday: true if is today
  *  imagePathDay: image path (String)
  *  WeatherInfoDay: info for the average weather(String)
  *  imagePathNight: image path (String)
@@ -18,77 +46,12 @@ import { Button } from 'react-native';
 
 export const Weather = (props) => {
   const today = new Date();
-  const formattedDate = today.toLocaleDateString();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const formattedDate = props.isToday ? today.toLocaleDateString() : tomorrow.toLocaleDateString();
 
-
-
-  let imagePathDay;
-  switch (props.imagePathDay) {
-    case 'cloudy':
-      imagePathDay = require('../../assets/weather/cloud.png');
-      break;
-    case 'cloudyRain':
-      imagePathDay = require('../../assets/weather/cloudyRain.png');
-      break;
-    case 'sunny':
-      imagePathDay = require('../../assets/weather/sunny.png');
-      break;
-    case 'snow':
-        imagePathDay = require('../../assets/weather/snow.png');
-        break;
-    case 'storm':
-        imagePathDay = require('../../assets/weather/snow.png');
-        break;
-    case 'clearNight':
-        imagePathDay = require('../../assets/weather/clearNight.png');
-        break;
-    case 'heavyRain':
-        imagePathDay = require('../../assets/weather/heavyRain.png');
-        break;
-    case 'rain':
-        imagePathDay = require('../../assets/weather/rain.png');
-        break;
-    case 'typhoon':
-        imagePathDay = require('../../assets/weather/typhoon.png');
-        break;
-    default:
-      // No default case
-      break;
-  }
-
-  let imagePathNight;
-  switch (props.imagePathNight) {
-    case 'cloudy':
-      imagePathNight = require('../../assets/weather/cloud.png');
-      break;
-    case 'cloudyRain':
-      imagePathNight = require('../../assets/weather/cloudyRain.png');
-      break;
-    case 'sunny':
-      imagePathNight = require('../../assets/weather/sunny.png');
-      break;
-    case 'snow':
-      imagePathNight = require('../../assets/weather/snow.png');
-        break;
-    case 'storm':
-      imagePathNight = require('../../assets/weather/snow.png');
-        break;
-    case 'clearNight':
-      imagePathNight = require('../../assets/weather/clearNight.png');
-        break;
-    case 'heavyRain':
-      imagePathNight = require('../../assets/weather/heavyRain.png');
-        break;
-    case 'rain':
-      imagePathNight = require('../../assets/weather/rain.png');
-        break;
-    case 'typhoon':
-      imagePathNight = require('../../assets/weather/typhoon.png');
-        break;
-    default:
-      // No default case
-      break;
-  }
+  let imagePathDay = getWeatherAsset(props.imagePathDay);
+  let imagePathNight = getWeatherAsset(props.imagePathNight);
 
     return (
     <View style={styles.container}>
@@ -103,7 +66,7 @@ export const Weather = (props) => {
             style={styles.image}
             source={imagePathDay}
           />
-          <Text style={styles.weatherInfo}>{props.weatherInfoDay}</Text>
+          <Text style={styles.weatherInfo}>{props.weatherInfoDay}{" F"}</Text>
         </View>
       </View>
       <View style={styles.nightContainer}>
@@ -113,7 +76,7 @@ export const Weather = (props) => {
             style={styles.image}
             source={imagePathNight}
           />
-          <Text style={styles.weatherInfo}>{props.weatherInfoNight}</Text>
+          <Text style={styles.weatherInfo}>{props.weatherInfoNight}{" F"}</Text>
         </View>
       </View>
     </View>

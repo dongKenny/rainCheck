@@ -13,7 +13,7 @@ import Suggestion from "../components/Clothes/Suggestion";
 import Details from "../components/Details/Details";
 import Header from "../components/Location/Header";
 import { Weather } from "../components/Weather/Weather";
-import { WeatherToggle } from "../components/Weather/WeatherToggle";
+import { parseShortForecast } from "../clothing_selection";
 import { ForecastBlock } from "../components/Forecast/ForecastBlock";
 
 const styles = StyleSheet.create({
@@ -75,6 +75,19 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const daily = forecastData['dailyForecast'];
   const hourly = forecastData['hourlyForecast'];
 
+  // daily.forEach(element => {
+  //   console.log(element);
+  // });
+
+  const dayTimeToday = daily[0]['isDaytime'] ? daily[0] : daily[1];
+  const nightTimeToday = daily[0]['isDaytime'] ? daily[1] : daily[0];
+
+  const dayTimeTomorrow = daily[2]['isDaytime'] ? daily[2] : daily[3];
+  const nightTimeTomorrow = daily[2]['isDaytime'] ? daily[3] : daily[2];
+
+  const forecastToday = parseShortForecast(dayTimeToday['detailedForecast']);
+  const forecastTomorrow = parseShortForecast(dayTimeTomorrow['detailedForecast']);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header currentCity={cityName} />
@@ -85,22 +98,26 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>
           <Clothing />
-          <Suggestion />
+          <Suggestion 
+            detailedForecast={daily[0]['detailedForecast']}
+          />
         </View>
         <View style={[styles.box, { backgroundColor: "green" }]}>
           {isWeatherVisible ? (
             <Weather
-              imagePathDay="sunny"
-              weatherInfoDay={daily[0]['temperature']}
-              imagePathNight="cloudyRain"
-              weatherInfoNight={daily[1]['temperature']}
+              isToday={true}
+              imagePathDay={forecastToday}
+              weatherInfoDay={dayTimeToday['temperature']}
+              imagePathNight={forecastToday}
+              weatherInfoNight={nightTimeToday['temperature']}
             />
           ) : (
-            <WeatherToggle
-              imagePathDay="rain"
-              weatherInfoDay={daily[2]['temperature']}
-              imagePathNight="snow"
-              weatherInfoNight={daily[3]['temperature']}
+            <Weather
+              isToday={false}
+              imagePathDay={forecastTomorrow}
+              weatherInfoDay={dayTimeTomorrow['temperature']}
+              imagePathNight={forecastTomorrow}
+              weatherInfoNight={nightTimeTomorrow['temperature']}
             />
           )}
           {/* button to select today or tomorrow */}

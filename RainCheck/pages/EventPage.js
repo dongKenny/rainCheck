@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 import Header from "../components/Location/Header";
+import { Events } from "../components/Events/Events";
 
 export default function EventPage({
   cityName,
+  events_data,
   handlePressOnIcon,
   onSwitchPage,
 }) {
@@ -16,7 +18,9 @@ export default function EventPage({
           onSwitchPage={onSwitchPage}
         />
       </View>
-      <Text>Event suggesions are coming soon</Text>
+      <Events 
+        events_data={events_data}
+      />
     </View>
   );
 }

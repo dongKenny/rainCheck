@@ -19,7 +19,6 @@ export default function App() {
   }, []);
 
   const handleForecastFetch = (forecast, city) => {
-    console.log("handle forecast fetch");
     setForecastData(forecast);
     setCurrentCity(city);
   };
@@ -65,6 +64,7 @@ export default function App() {
   ) : (
     <EventPage
       cityName={currentCity}
+      events_data={forecastData['events'] ? forecastData['events'] : []}
       handlePressOnIcon={handleIconPressEvents}
       onSwitchPage={() => {
         setIsWeatherPage(true);

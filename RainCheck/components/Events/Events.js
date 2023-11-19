@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginRight: 30,
-        marginTop: 30,
     },
     fonts: {
         marginBottom: 8,

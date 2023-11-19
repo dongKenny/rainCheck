@@ -5,6 +5,7 @@ import Toggle from "../components/Clothes/Toggle";
 import Suggestion from "../components/Clothes/Suggestion";
 import { Weather } from '../components/Weather/Weather';
 import { WeatherToggle } from '../components/Weather/WeatherToggle';
+import {ForecastBlock} from '../components/Forecast/ForecastBlock'; 
 
 
 const styles = StyleSheet.create({
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         height: 100,
     },
     bottomContainer: {
-        marginTop: 20, // 上部との余白を設定
+        marginTop: 20,
         alignItems: "center",
     },
     button: {
@@ -93,7 +94,9 @@ export const WeatherPage = () => {
             </View>
             <View style={styles.bottomContainer}>
                 <View style={[styles.bottombox, { backgroundColor: "darkgray" }]} />
-                <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]} />
+                <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
+                        <ForecastBlock />
+                </View>
             </View>
         </SafeAreaView>
     );

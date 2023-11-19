@@ -9,12 +9,13 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from Expo
 
-export default function Header( currentCity ) {
+export default function Header( {currentCity} ) {
   return (
     <View style={styles.container}>
       <View style={styles.headbox}></View>
       <View style={styles.headbox}>
-      <Text style={styles.text}>{currentCity || "Loading..."}</Text> {/* Use currentCity */}      </View>
+        <Text style={styles.text}>{currentCity}</Text>
+      </View>
       <View
         style={[
           styles.headbox,

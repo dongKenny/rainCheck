@@ -37,7 +37,7 @@ export const WeatherPage = ({ currentCity }) => {
     const cityName = currentCity?.name || "Loading..."; // Replace 'name' with the correct property
     return (
         <SafeAreaView style={styles.container}>
-            <Header currentCity={currentCity} /> {/* Insert Header component */}
+            <Header currentCity={cityName} />
             
             <View style={styles.topContainer}>
                 <View style={[styles.topbox, { backgroundColor: "white" }]} />

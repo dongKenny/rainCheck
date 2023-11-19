@@ -38,7 +38,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
     return cityComponent ? cityComponent.long_name : null;
   };
 
-  const getWeather = async (latitude, longitude) => {
+  const getWeather = async (latitude, longitude, city) => {
     try {
       const response = await axios.get(`https://api.weather.gov/points/${latitude},${longitude}`);
       const forecastUrl = response.data.properties.forecast;

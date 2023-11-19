@@ -21,6 +21,8 @@ export function getWeatherAsset(imageType) {
       return require('../../assets/weather/heavyRain.png');
     case 'typhoon':
       return require('../../assets/weather/typhoon.png');
+    case 'moon':
+      return require('../../assets/weather/moon.png');
     default:
       // No default case
       break;
@@ -49,9 +51,8 @@ export const Weather = (props) => {
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
   const formattedDate = props.isToday ? today.toLocaleDateString() : tomorrow.toLocaleDateString();
-
   let imagePathDay = getWeatherAsset(props.imagePathDay);
-  let imagePathNight = getWeatherAsset(props.imagePathNight);
+  let imagePathNight = getWeatherAsset(props.imagePathNight === 'sunny' ? 'moon' : props.imagePathNight);
 
     return (
     <View style={styles.container}>

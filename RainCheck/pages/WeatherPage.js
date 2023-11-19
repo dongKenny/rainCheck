@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 export const WeatherPage = ({ currentCity, forecastData }) => {
-  const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
+  const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
   const toggleWeather = () => {
@@ -82,7 +82,9 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const nightTimeTomorrow = daily[2]['isDaytime'] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday['detailedForecast']);
+  const forecastTonight = parseShortForecast(dayTimeToday['detailedForecast']);
   const forecastTomorrow = parseShortForecast(dayTimeTomorrow['detailedForecast']);
+  const forecastTomorrowNight = parseShortForecast(dayTimeTomorrow['detailedForecast']);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,7 +107,7 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
               isToday={true}
               imagePathDay={forecastToday}
               weatherInfoDay={dayTimeToday['temperature']}
-              imagePathNight={forecastToday}
+              imagePathNight={forecastTonight}
               weatherInfoNight={nightTimeToday['temperature']}
             />
           ) : (
@@ -113,7 +115,7 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
               isToday={false}
               imagePathDay={forecastTomorrow}
               weatherInfoDay={dayTimeTomorrow['temperature']}
-              imagePathNight={forecastTomorrow}
+              imagePathNight={forecastTomorrowNight}
               weatherInfoNight={nightTimeTomorrow['temperature']}
             />
           )}

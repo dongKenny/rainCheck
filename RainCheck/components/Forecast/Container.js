@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import { getWeatherAsset } from '../Weather/Weather';
 
 /**
  * 
@@ -20,43 +21,7 @@ export const Container = (props) => {
   const currentHour = today.getHours();
   const formattedHour = currentHour.toString().padStart(2, '0');
 
-
-  let imagePathWeather;
-  switch (props.imagePathWeather) {
-    case 'cloudy':
-        imagePathWeather = require('../../assets/weather/cloud.png');
-      break;
-    case 'cloudyRain':
-        imagePathWeather = require('../../assets/weather/cloudyRain.png');
-      break;
-    case 'sunny':
-        imagePathWeather = require('../../assets/weather/sunny.png');
-      break;
-    case 'snow':
-        imagePathWeather = require('../../assets/weather/snow.png');
-        break;
-    case 'storm':
-        imagePathWeather = require('../../assets/weather/snow.png');
-        break;
-    case 'clearNight':
-        imagePathWeather = require('../../assets/weather/clearNight.png');
-        break;
-    case 'heavyRain':
-        imagePathWeather = require('../../assets/weather/heavyRain.png');
-        break;
-    case 'rain':
-        imagePathWeather = require('../../assets/weather/rain.png');
-        break;
-    case 'typhoon':
-        imagePathWeather = require('../../assets/weather/typhoon.png');
-        break;
-        // ... (existing cases)
-    default:
-        console.log('No matching image path:', props.imagePathWeather);
-        break;
-    
-  }
-
+  let imagePathWeather = getWeatherAsset(props.imagePathWeather);
 
   return (
     <View style={styles.container}>

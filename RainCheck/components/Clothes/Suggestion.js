@@ -1,12 +1,11 @@
 import { Text, Button, View, StyleSheet } from "react-native";
 
-export default function Suggestion() {
+export default function Suggestion( {detailedForecast} ) {
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyle}>Suggestions: </Text>
       <View style={[styles.suggestioncontainer]}>
         <Text style={styles.textstyle}>
-          It's very hot at daytime, but at night the temparature drops.{" "}
+          {detailedForecast}
         </Text>
       </View>
     </View>
@@ -32,6 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginVertical: 10,
+    marginRight: 1,
     padding: 6,
   },
 });

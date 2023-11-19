@@ -2,12 +2,16 @@ import { useState } from "react";
 import React from "react";
 import { StyleSheet, View, Image, Dimensions } from "react-native";
 import Toggle from "./Toggle";
+import chooseClothes from "../../clothing_selection";
 
-export default function Clothing() {
+export default function Clothing( {dayData, nightData} ) {
   const [isDay, setIsDay] = useState(true);
 
-  const dayClothes = ["visor", "tshirt", "sandals", "skirt"];
-  const nightClothes = ["hat", "tshirt", "shoes", "jeans"];
+  const day = {'temperature': dayData['temperature'], 'forecast': dayData['detailedForecast'], 'rain': dayData['rain']};
+  const night = {'temperature': nightData['temperature'], 'forecast': nightData['detailedForecast'], 'rain': nightData['rain']};
+  
+  const dayClothes = chooseClothes(day);
+  const nightClothes = chooseClothes(night);
 
   const switchDayAndNight = () => {
     setIsDay(!isDay);
@@ -34,7 +38,7 @@ export default function Clothing() {
 
   const getTopSource = (clothItem) => {
     switch (clothItem) {
-      case "tshirt":
+      case "shirt":
         return require(`../../assets/clothes/top/tshirt.png`);
       case "sweater":
         return require(`../../assets/clothes/top/sweater.png`);
@@ -71,9 +75,9 @@ export default function Clothing() {
       case "jeans":
         return require(`../../assets/clothes/bottom/jeans.png`);
       case "khaki":
-        return require(`../../assets/clothes/bottom/khaki.jpg`);
+        return require(`../../assets/clothes/bottom/khaki.png`);
       case "shorts":
-        return require(`../../assets/clothes/bottom/shorts.jpg`);
+        return require(`../../assets/clothes/bottom/shorts.png`);
       case "trunks":
         return require(`../../assets/clothes/bottom/trunks.png`);
     }
@@ -87,16 +91,16 @@ export default function Clothing() {
           <Image
             source={
               isDay
-                ? getHeadSource(dayClothes[0])
-                : getHeadSource(nightClothes[0])
+                ? getHeadSource(dayClothes['head'])
+                : getHeadSource(nightClothes['head'])
             }
             style={styles.clothItem}
           />
           <Image
             source={
               isDay
-                ? getTopSource(dayClothes[1])
-                : getTopSource(nightClothes[1])
+                ? getTopSource(dayClothes['top'])
+                : getTopSource(nightClothes['top'])
             }
             style={styles.clothItem}
           />
@@ -105,16 +109,16 @@ export default function Clothing() {
           <Image
             source={
               isDay
-                ? getFeetSource(dayClothes[2])
-                : getFeetSource(nightClothes[2])
+                ? getFeetSource(dayClothes['shoes'])
+                : getFeetSource(nightClothes['shoes'])
             }
             style={styles.clothItem}
           />
           <Image
             source={
               isDay
-                ? getBottomSource(dayClothes[3])
-                : getBottomSource(nightClothes[3])
+                ? getBottomSource(dayClothes['bottom'])
+                : getBottomSource(nightClothes['bottom'])
             }
             style={styles.clothItem}
           />

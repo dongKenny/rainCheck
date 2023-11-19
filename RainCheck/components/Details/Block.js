@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   detailItem: {
-    width: Dimensions.get("window").width / 9,
-    height: Dimensions.get("window").width / 9,
+    width: Dimensions.get("window").width / 16,
+    height: Dimensions.get("window").width / 16,
   },
   textbox: {
     flexDirection: "row",

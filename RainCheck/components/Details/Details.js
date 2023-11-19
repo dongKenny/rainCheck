@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image, Dimensions } from "react-native";
 import Block from "./Block";
 
-export default function Details( {isToday, today, tomorrow} ) {
+export default function Details( {isToday, today, tomorrow, aqi} ) {
   const detail = isToday ? today : tomorrow
 
   const detailInfo = {
@@ -21,6 +21,11 @@ export default function Details( {isToday, today, tomorrow} ) {
       value: detail['windSpeed'],
       measure: "mph",
     },
+    aqi: {
+      imgSrc: require("../../assets/details/aqi-icon.png"),
+      value: aqi,
+      measure: "AQI",
+    },
   };
 
   return (
@@ -29,6 +34,7 @@ export default function Details( {isToday, today, tomorrow} ) {
       <Block weatherDetail={detailInfo.humidity} />
       <Block weatherDetail={detailInfo.rainPercent} />
       <Block weatherDetail={detailInfo.windSpeed} />
+      <Block weatherDetail={detailInfo.aqi} />
     </View>
   );
 }

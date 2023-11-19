@@ -141,6 +141,7 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
             isToday={isWeatherVisible}
             today={dayTimeToday}
             tomorrow={dayTimeTomorrow}
+            aqi={forecastData['aqi']}
           />
         </View>
         <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginRight: 30,
-        marginTop: 30
+        marginTop: 30,
     },
     fonts: {
         marginBottom: 8,
@@ -66,6 +66,8 @@ const styles = StyleSheet.create({
     user: {
         flexDirection: 'row',
         marginBottom: 6,
+        shadowRadius: 5,
+        shadowOpacity: .5
     },
     image: {
         width: 30,

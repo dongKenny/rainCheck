@@ -60,7 +60,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
+export const WeatherPage = ({
+  currentCity,
+  forecastData,
+  onIconPress,
+  onSwitchPage,
+}) => {
   const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -86,19 +91,35 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTonight = parseShortForecast(nightTimeToday["detailedForecast"]);
-  const forecastTomorrow = parseShortForecast(dayTimeTomorrow["detailedForecast"]);
-  const forecastTomorrowNight = parseShortForecast(nightTimeTomorrow["detailedForecast"]);
+  const forecastTonight = parseShortForecast(
+    nightTimeToday["detailedForecast"]
+  );
+  const forecastTomorrow = parseShortForecast(
+    dayTimeTomorrow["detailedForecast"]
+  );
+  const forecastTomorrowNight = parseShortForecast(
+    nightTimeTomorrow["detailedForecast"]
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
+        <Header
+          currentCity={cityName}
+          onIOSIconPress={handlePressOnIcon}
+          onSwitchPage={onSwitchPage}
+        />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "red" }]}>
           <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
-          <Suggestion detailedForecast={isWeatherVisible ? dayTimeToday['detailedForecast'] : dayTimeTomorrow['detailedForecast']} />
+          <Suggestion
+            detailedForecast={
+              isWeatherVisible
+                ? dayTimeToday["detailedForecast"]
+                : dayTimeTomorrow["detailedForecast"]
+            }
+          />
         </View>
         <View style={[styles.box, { backgroundColor: "green" }]}>
           {isWeatherVisible ? (

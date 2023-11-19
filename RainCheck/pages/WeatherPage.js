@@ -86,7 +86,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTonight = parseShortForecast(dayTimeToday["detailedForecast"]);
+  const forecastTonight = parseShortForecast(nightTimeToday["detailedForecast"]);
   const forecastTomorrow = parseShortForecast(dayTimeTomorrow["detailedForecast"]);
   const forecastTomorrowNight = parseShortForecast(nightTimeTomorrow["detailedForecast"]);
 

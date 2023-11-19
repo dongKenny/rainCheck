@@ -28,13 +28,24 @@ export default function Details({ isToday, today, tomorrow, aqi }) {
     },
   };
 
+
   return (
     <View style={styles.container}>
-      {/* <Image source={require("../../assets/details/humidity-icon.png")} /> */}
-      <Block weatherDetail={detailInfo.humidity} />
-      <Block weatherDetail={detailInfo.rainPercent} />
-      <Block weatherDetail={detailInfo.windSpeed} />
-      <Block weatherDetail={detailInfo.aqi} />
+      <View style={styles.detailItem}>
+        <Block weatherDetail={detailInfo.humidity} />
+      </View>
+      <View style={styles.separator} />
+      <View style={styles.detailItem}>
+        <Block weatherDetail={detailInfo.rainPercent} />
+      </View>
+      <View style={styles.separator} />
+      <View style={styles.detailItem}>
+        <Block weatherDetail={detailInfo.windSpeed} />
+      </View>
+      <View style={styles.separator} />
+      <View style={styles.detailItem}>
+        <Block weatherDetail={detailInfo.aqi} />
+      </View>
     </View>
   );
 }
@@ -45,8 +56,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    margin: 5,
-    marginLeft: 10,
-    marginRight: 10,
+    margin: 10,
+    backgroundColor: "#EDE7F6", // Light violet background color
+  },
+  detailItem: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    paddingLeft: 14,
+    flex: 1, // Adjust the flex property for equal distribution
+  },
+  separator: {
+    height: '100%',
+    width: 1,
+    backgroundColor: '#9575CD', // Darker violet for the separator line
   },
 });

@@ -1,17 +1,15 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, Button, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const WeatherAPI = ({ address, onForecastFetch }) => {
   const [forecastData, setForecastData] = useState(null);
-
   useEffect(() => {
     if (address) {
       getLatLong(address);
     }
   }, [address]);
 
-  const getLatLong = async () => {
+  const getLatLong = async (address) => {
     const googleMapsApiKey = 'AIzaSyBNe4Ll1HbG3HxMYtOffdd29zfoFIny340';
     try {
       const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
@@ -27,7 +25,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
       
       getWeather(lat, lng, city);
     } catch (error) {
-      console.error('Error fetching location data:', error);
+      console.error('Error fetching location data in getLatLong:', error);
     }
   };
 
@@ -57,7 +55,7 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
       setForecastData(parsedData);
       onForecastFetch(parsedData, city);
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      console.error('Error fetching weather data in getWeather:', error);
     }
   };
 

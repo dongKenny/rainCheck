@@ -11,7 +11,7 @@ export default function App() {
   const [currentCity, setCurrentCity] = useState(null);
 
   useEffect(() => {
-   if (!currentAddress) {
+    if (!currentAddress) {
       setCurrentAddress(null);
     }
   }, []);
@@ -34,7 +34,10 @@ export default function App() {
             address={currentAddress}
             onForecastFetch={handleForecastFetch} // Pass the function to update forecastData
           />
-          <WeatherPage />
+          <WeatherPage 
+            currentCity={currentCity}
+            forecastData={forecastData}
+          />
           <StatusBar style="auto" />
         </>
       )}
@@ -45,8 +48,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

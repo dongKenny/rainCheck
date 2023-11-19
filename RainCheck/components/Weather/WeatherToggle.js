@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native';
+import { View, Image, Text, StyleSheet, Button } from 'react-native';
 
 
 /**
@@ -16,10 +15,11 @@ import { Button } from 'react-native';
  */
 
 
-export const Weather = (props) => {
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString();
-
+export const WeatherToggle = (props) => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const formattedDate = tomorrow.toLocaleDateString();
 
 
   let imagePathDay;
@@ -59,31 +59,31 @@ export const Weather = (props) => {
   let imagePathNight;
   switch (props.imagePathNight) {
     case 'cloudy':
-      imagePathNight = require('../../assets/weather/cloud.png');
-      break;
+        imagePathNight = require('../../assets/weather/cloud.png');
+        break;
     case 'cloudyRain':
-      imagePathNight = require('../../assets/weather/cloudyRain.png');
-      break;
+        imagePathNight = require('../../assets/weather/cloudyRain.png');
+        break;
     case 'sunny':
-      imagePathNight = require('../../assets/weather/sunny.png');
-      break;
+        imagePathNight = require('../../assets/weather/sunny.png');
+        break;
     case 'snow':
-      imagePathNight = require('../../assets/weather/snow.png');
+        imagePathNight = require('../../assets/weather/snow.png');
         break;
     case 'storm':
-      imagePathNight = require('../../assets/weather/snow.png');
+        imagePathNight = require('../../assets/weather/snow.png');
         break;
     case 'clearNight':
-      imagePathNight = require('../../assets/weather/clearNight.png');
+        imagePathNight = require('../../assets/weather/clearNight.png');
         break;
     case 'heavyRain':
-      imagePathNight = require('../../assets/weather/heavyRain.png');
+        imagePathNight = require('../../assets/weather/heavyRain.png');
         break;
     case 'rain':
-      imagePathNight = require('../../assets/weather/rain.png');
+        imagePathNight = require('../../assets/weather/rain.png');
         break;
     case 'typhoon':
-      imagePathNight = require('../../assets/weather/typhoon.png');
+        imagePathNight = require('../../assets/weather/typhoon.png');
         break;
     default:
       // No default case

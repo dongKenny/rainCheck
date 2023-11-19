@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     color: "darkblue",
+    fontSize: 12
   },
   suggestioncontainer: {
     flex: 1,

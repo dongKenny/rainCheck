@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Container } from '../Forecast/Container';
+import { parseShortForecast } from "../../clothing_selection";
 
-const getWeatherData = (viewMode) => {
+const getWeatherData = (viewMode, daily, weekly) => {
+  console.log(weekly);
   const currentHour = new Date().getHours();
   // Assume you have a function to get weekly weather data and daily weather data
   if (viewMode === 'daily') {
     // Get daily weather data for the next 48 hours
-    // ... (existing logic for daily view)
     return Array.from({ length: 48 }, (_, index) => {
       const nextHour = new Date();
       nextHour.setHours(currentHour + index);
@@ -15,8 +16,8 @@ const getWeatherData = (viewMode) => {
       return {
         day: nextHour.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' }),
         formattedHour: `${nextHour.getHours().toString().padStart(2, '0')}:${'00'}`,
-        imagePathWeather: 'sunny', // Use the correct image path
-        hourlyTemp: `${Math.floor(Math.random() * 30) + 50}°F`, // Replace with actual temperature data
+        imagePathWeather: parseShortForecast(daily[`${index}`]['shortForecast']),
+        hourlyTemp: `${daily[`${index}`]['temperature']}°F`,
       };
     });
   } else if (viewMode === 'weekly') {
@@ -32,22 +33,20 @@ const getWeatherData = (viewMode) => {
       const nextDay = new Date(startOfWeek);
       nextDay.setDate(startOfWeek.getDate() + dayIndex);
     
-  
       return {
         day: nextDay.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' }),
         dayOfWeek: weekdays[nextDay.getDay()],
-        imagePathWeather: 'rain', // Use the correct image path
-        dailyTemp: `${Math.floor(Math.random() * 30) + 50}°F`, // Replace with actual temperature data
+        imagePathWeather: parseShortForecast(weekly[`${dayIndex}`]['shortForecast']),
+        dailyTemp: `${weekly[`${dayIndex}`]['temperature']}°F`,
       };
     });
   }
 };
 
-export const ForecastBlock = (props) => {
+export const ForecastBlock = ( {hourlyForecast, weeklyForecast} ) => {
   const containerCount = 48; // Number of containers
   const [viewMode, setViewMode] = useState('daily'); // State to track the selected view mode
-  const weatherData = getWeatherData(viewMode); // Assume you have a function to get hourly weather data
-
+  const weatherData = getWeatherData(viewMode, hourlyForecast, weeklyForecast); // Assume you have a function to get hourly weather data
 
   const toggleViewMode = (mode) => {
     setViewMode(mode);

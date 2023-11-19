@@ -1,7 +1,6 @@
 import * as outfits from './constants/outfits';
 
 export function parseShortForecast(forecast) {
-    console.log(forecast);
     forecast = forecast.toLowerCase();
 
     let firstForecast = '';

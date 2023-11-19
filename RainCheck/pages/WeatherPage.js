@@ -75,10 +75,6 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const daily = forecastData['dailyForecast'];
   const hourly = forecastData['hourlyForecast'];
 
-  // daily.forEach(element => {
-  //   console.log(element);
-  // });
-
   const dayTimeToday = daily[0]['isDaytime'] ? daily[0] : daily[1];
   const nightTimeToday = daily[0]['isDaytime'] ? daily[1] : daily[0];
 
@@ -141,7 +137,10 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
           <Details />
         </View>
         <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
-          <ForecastBlock />
+          <ForecastBlock
+            hourlyForecast={hourly}
+            weeklyForecast={daily}
+          />
         </View>
       </View>
     </SafeAreaView>

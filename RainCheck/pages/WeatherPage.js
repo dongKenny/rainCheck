@@ -73,7 +73,7 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   }
 
   const daily = forecastData['dailyForecast'];
-  const hourly = forecastData['hourlyForedcast'];
+  const hourly = forecastData['hourlyForecast'];
 
   return (
     <SafeAreaView style={styles.container}>

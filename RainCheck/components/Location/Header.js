@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   headbox: {
     flexDirection: "row",
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
   text: {
     fontSize: 20,

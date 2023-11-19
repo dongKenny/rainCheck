@@ -137,7 +137,11 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
       </View>
       <View style={styles.bottomContainer}>
         <View style={[styles.bottombox, { backgroundColor: "darkgray" }]}>
-          <Details />
+          <Details 
+            isToday={isWeatherVisible}
+            today={dayTimeToday}
+            tomorrow={dayTimeTomorrow}
+          />
         </View>
         <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
           <ForecastBlock

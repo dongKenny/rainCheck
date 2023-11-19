@@ -1,16 +1,16 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 
-export default function Block({ wheatherDetail }) {
+export default function Block({ weatherDetail }) {
   return (
     <View style={styles.blockcontainer}>
-      <Image source={wheatherDetail.imgSrc} style={styles.detailItem} />
+      <Image source={weatherDetail.imgSrc} style={styles.detailItem} />
       <View style={styles.textbox}>
         <Text style={{ marginHorizontal: 5, fontSize: 15 }}>
-          {wheatherDetail.value}
+          {weatherDetail.value}
         </Text>
         <Text style={{ marginHorizontal: 5, fontSize: 18, fontWeight: "bold" }}>
-          {wheatherDetail.measure}
+          {weatherDetail.measure}
         </Text>
       </View>
     </View>

@@ -20,16 +20,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center", // 中央揃えに変更
+    alignItems: "center",
   },
   topContainer: {
     flex: 1,
     justifyContent: "center",
     alignContent: "stretch",
+    backgroundColor: "plum",
   },
   upperContainer: {
     flexDirection: "row",
-    alignItems: "center", // 中央揃えに変更
+    alignItems: "center",
   },
   topbox: {
     width: 200,
@@ -44,23 +45,22 @@ const styles = StyleSheet.create({
     height: 100,
   },
   bottomContainer: {
-    marginTop: 20, // 上部との余白を設定
     alignItems: "center",
   },
   button: {
     padding: 8,
     borderRadius: 5,
-    marginVertical: 8,
+    // marginVertical: 8,
   },
   buttonText: {
     fontSize: 15, // Adjust the font size as needed
     fontWeight: "bold",
     textAlign: "center", // Center the text horizontally
-    color: "gray", // Adjust the color as needed
+    color: "dimgray", // Adjust the color as needed
   },
 });
 
-export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
+export const WeatherPage = ({ currentCity, forecastData }) => {
   const cityName = currentCity || "Loading...";
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
@@ -74,10 +74,6 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
 
   const daily = forecastData["dailyForecast"];
   const hourly = forecastData["hourlyForecast"];
-
-  const handlePressOnIcon = () => {
-    onIconPress();
-  };
 
   const dayTimeToday = daily[0]["isDaytime"] ? daily[0] : daily[1];
   const nightTimeToday = daily[0]["isDaytime"] ? daily[1] : daily[0];
@@ -97,14 +93,14 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
+        <Header currentCity={cityName} />
       </View>
       <View style={styles.upperContainer}>
-        <View style={[styles.box, { backgroundColor: "red" }]}>
+        <View style={[styles.box, { backgroundColor: "lavenderblush" }]}>
           <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
           <Suggestion detailedForecast={daily[0]["detailedForecast"]} />
         </View>
-        <View style={[styles.box, { backgroundColor: "green" }]}>
+        <View style={[styles.box, { backgroundColor: "lavender" }]}>
           {isWeatherVisible ? (
             <Weather
               isToday={true}
@@ -127,7 +123,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
             style={[
               styles.button,
               {
-                backgroundColor: isWeatherVisible ? "lightgreen" : "lightblue",
+                backgroundColor: isWeatherVisible ? "thistle" : "lightgray",
               },
             ]}
             onPress={toggleWeather}
@@ -139,7 +135,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <View style={[styles.bottombox, { backgroundColor: "darkgray" }]}>
+        <View style={[styles.bottombox, { backgroundColor: "honeydew" }]}>
           <Details
             isToday={isWeatherVisible}
             today={dayTimeToday}
@@ -147,7 +143,7 @@ export const WeatherPage = ({ currentCity, forecastData, onIconPress }) => {
             aqi={forecastData["aqi"]}
           />
         </View>
-        <View style={[styles.bottombox, { backgroundColor: "#FFF7CC" }]}>
+        <View style={[styles.bottombox, { backgroundColor: "ivory" }]}>
           <ForecastBlock hourlyForecast={hourly} weeklyForecast={daily} />
         </View>
       </View>

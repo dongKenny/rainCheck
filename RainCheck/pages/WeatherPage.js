@@ -75,6 +75,10 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const daily = forecastData["dailyForecast"];
   const hourly = forecastData["hourlyForecast"];
 
+  const handlePressOnIcon = () => {
+    onIconPress();
+  };
+
   const dayTimeToday = daily[0]["isDaytime"] ? daily[0] : daily[1];
   const nightTimeToday = daily[0]["isDaytime"] ? daily[1] : daily[0];
 
@@ -82,19 +86,31 @@ export const WeatherPage = ({ currentCity, forecastData }) => {
   const nightTimeTomorrow = daily[2]["isDaytime"] ? daily[3] : daily[2];
 
   const forecastToday = parseShortForecast(dayTimeToday["detailedForecast"]);
-  const forecastTonight = parseShortForecast(nightTimeToday["detailedForecast"]);
-  const forecastTomorrow = parseShortForecast(dayTimeTomorrow["detailedForecast"]);
-  const forecastTomorrowNight = parseShortForecast(nightTimeTomorrow["detailedForecast"]);
+  const forecastTonight = parseShortForecast(
+    nightTimeToday["detailedForecast"]
+  );
+  const forecastTomorrow = parseShortForecast(
+    dayTimeTomorrow["detailedForecast"]
+  );
+  const forecastTomorrowNight = parseShortForecast(
+    nightTimeTomorrow["detailedForecast"]
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Header currentCity={cityName} />
+        <Header currentCity={cityName} onIOSIconPress={handlePressOnIcon} />
       </View>
       <View style={styles.upperContainer}>
         <View style={[styles.box, { backgroundColor: "lavenderblush" }]}>
           <Clothing dayData={dayTimeToday} nightData={nightTimeToday} />
-          <Suggestion detailedForecast={isWeatherVisible ? dayTimeToday['detailedForecast'] : dayTimeTomorrow['detailedForecast']} />
+          <Suggestion
+            detailedForecast={
+              isWeatherVisible
+                ? dayTimeToday["detailedForecast"]
+                : dayTimeTomorrow["detailedForecast"]
+            }
+          />
         </View>
         <View style={[styles.box, { backgroundColor: "lavender" }]}>
           {isWeatherVisible ? (

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 export const WeatherPage = ({ currentCity, forecastData }) => { 
-  const cityName = currentCity?.name || "Loading..."; // Replace 'name' with the correct property
+  const cityName = currentCity || "Loading..."; // Replace 'name' with the correct property
   const [isWeatherVisible, setIsWeatherVisible] = useState(true);
 
   const toggleWeather = () => {

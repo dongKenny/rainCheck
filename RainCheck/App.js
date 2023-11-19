@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { WeatherPage} from './pages/WeatherPage'
 import ForecastPrompt from './components/Location/Prompt';
+import { Events } from './components/Events/Events';
 import WeatherAPI from './weatherAPI'; 
 
 export default function App() {

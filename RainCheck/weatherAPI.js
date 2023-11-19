@@ -47,10 +47,18 @@ const WeatherAPI = ({ address, onForecastFetch }) => {
       ]);
       const aqi_response = await axios.get(`https://api.waqi.info/feed/${encodeURIComponent(city.trim())}/?token=${process.env.EXPO_PUBLIC_AQI_API_KEY}`);
       const aqi = aqi_response['data']['data']['aqi'];
+
+      const event_response = await(axios.get(`https://serpapi.com/search.json?engine=google_events&q=Events+in+${city}&hl=en&gl=us&htichips=event_type:Virtual-Event,date:today`, {
+        params: {
+          api_key: process.env.EXPO_PUBLIC_SERP_API_KEY
+        }
+      }));
+
       const parsedData = {
         dailyForecast: parseForecast(forecastResponse.data.properties.periods),
         hourlyForecast: parseHourlyForecast(hourlyForecastResponse.data.properties.periods),
-        aqi: aqi
+        aqi: aqi,
+        events: event_response['data']['events_results']
       };
 
       setForecastData(parsedData);

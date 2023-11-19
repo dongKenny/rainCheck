@@ -9,7 +9,7 @@ export default function Block({ weatherDetail }) {
         <Text style={{ marginHorizontal: 5, fontSize: 15 }}>
           {weatherDetail.value}
         </Text>
-        <Text style={{ marginHorizontal: 5, fontSize: 18, fontWeight: "bold" }}>
+        <Text style={{ marginHorizontal: 5, fontSize: 17, fontWeight: "bold" }}>
           {weatherDetail.measure}
         </Text>
       </View>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     //borderWidth: 1,
     borderColor: "black",
     // backgroundColor: "red",
-    padding: 10,
+    padding: 8,
     marginLeft: 10,
   },
   detailItem: {
